@@ -1,0 +1,18 @@
+# Gitleaks configuration file
+# This is a sample configuration to show DevSecOps best practices
+
+[allowlist]
+description = "Allowlist for project-specific safe patterns"
+paths = [
+    '''tests/.*''', # Allow secrets in tests for demonstration
+]
+
+[[rules]]
+description = "Custom Rule: Detect AWS Access Key"
+regex = '''AKIA[0-9A-Z]{16}'''
+tags = ["key", "AWS"]
+
+[[rules]]
+description = "Custom Rule: Detect Generic API Key"
+regex = '''(?i)(api_key|secret_key|password)(?:.*['|"])([0-9a-zA-Z]{16,40})(?:['|"])'''
+tags = ["key", "generic"]
